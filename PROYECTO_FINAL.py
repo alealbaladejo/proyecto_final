@@ -84,6 +84,8 @@ def menu():
             opcion2()
         elif opcion == "3":
             opcion3()
+        elif opcion == "0":
+            print("Saliendo...")
         else:
             print("Eso no es una opción posible. Vuelve a intentarlo (0 para salir)")
 
