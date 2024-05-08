@@ -23,7 +23,6 @@ def opcion1():
         print(f"Resultado: {home_team_short} {home_score}-{away_score} {away_team_short}")
         print(f"Árbitro del partido: {arbitro}\n")
 
-
 def opcion2():
     url = 'https://api.football-data.org/v4/competitions/PD/standings/?season=2022'
     headers = {'X-Auth-Token': TOKEN}
