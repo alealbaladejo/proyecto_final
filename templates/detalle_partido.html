@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Partido{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid mb-5">
+    <div class="container text-center py-5">
+        <h1 class="text-primary mb-4">DETALLES DEL PARTIDO</h1>
+        <div class="mx-auto" style="max-width: 600px;">
+            <!-- Muestra la información del partido aquí -->
+            <div class="partido-info">
+                <!-- Escudo de la competición -->
+                <div class="competicion-info">
+                    {{competicion }}
+                    <img  src="{{ imagen_comp }}" alt="Escudo de la competición" class="escudo-competicion"> 
+                </div>
+                <!-- Detalles del partido -->
+                <div class="partido-info">
+                    <p><strong>Fecha:</strong> {{ fecha }}</p>
+                    <!-- Escudo y nombre del equipo local -->
+                    <div class="equipo-local">
+                        <img src="{{ escudo_local }}" alt="Escudo del equipo local" class="escudo-equipo">  {{ local }}
+                    </div>
+                    <!-- Escudo y nombre del equipo visitante -->
+                    <div class="equipo-visitante">
+                        <img src="{{ escudo_visit }}" alt="Escudo del equipo visitante" class="escudo-equipo">  {{ visitante }}
+                    </div>
+                    <!-- Resultado del partido -->
+                    <div class="resultado">
+                        <p><strong>Resultado:</strong> {{ goles_local }}-{{ goles_visit }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

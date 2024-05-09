@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid mb-5">
+    <div class="container text-center py-5">
+        <h1 class="text-primary mb-4">Creado por Alejandro</h1>
+        <h1 class="text-white display-3 mb-5">BIENVENIDO A LA API DE FÚTBOL</h1>
+        <div class="mx-auto" style="width: 200%; max-width: 600px;">
+            <a href="{{ url_for('partidos') }}" class="btn btn-primary btn-lg">Ver Partidos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
