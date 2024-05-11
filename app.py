@@ -83,8 +83,37 @@ def detalles_partido(partido_numero):
     return render_template('detalle_partido.html',goles_local = partido_seleccionado['goles_local'],goles_visit = partido_seleccionado['goles_visit'] ,escudo_local = partido_seleccionado['escudo_local'], escudo_visit= partido_seleccionado['escudo_visit'], imagen_comp = partido_seleccionado['imagen_comp'],competicion = partido_seleccionado['competicion'], fecha=partido_seleccionado['fecha'], local=partido_seleccionado['local'], visitante=partido_seleccionado['visitante'])
 
 
+@app.route('/clasificacion', methods=['GET', 'POST'])
+def clasificacion():
+    if request.method == 'POST':
+        liga_codigo = request.form['liga_codigo']
+        temporada = request.form['year']
+        url = f'https://api.football-data.org/v4/competitions/{liga_codigo}/standings/?season={temporada}'
+        token = os.environ.get('token')
+        headers = {'X-Auth-Token': token}
+        response = requests.get(url, headers=headers)
+        datos_clasificacion = response.json()
 
 
+        return render_template('clasificacion.html', ligas=obtener_ligas(), liga_seleccionada=liga_codigo, year=temporada, datos_clasificacion=datos_clasificacion)
+
+    return render_template('clasificacion.html', ligas=obtener_ligas())
+
+def obtener_ligas():
+    token = os.environ.get('token')
+    headers = {'X-Auth-Token': token}
+    url = 'https://api.football-data.org/v4/competitions'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    ligas = []  # Lista para almacenar los códigos y nombres de las ligas
+
+    for competition in data['competitions']:
+        codigo_liga = competition['code']
+        nombre_liga = competition['name']
+        ligas.append((codigo_liga, nombre_liga))  
+
+    return ligas
 
 
 

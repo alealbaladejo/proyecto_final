@@ -15,18 +15,13 @@
                     {{competicion }}
                     <img  src="{{ imagen_comp }}" alt="Escudo de la competición" class="escudo-competicion"> 
                 </div>
-                <!-- Detalles del partido -->
                 <div class="partido-info">
                     <p><strong>Fecha:</strong> {{ fecha }}</p>
-                    <!-- Escudo y nombre del equipo local -->
                     <div class="equipo-local">
                         <img src="{{ escudo_local }}" alt="Escudo del equipo local" class="escudo-equipo">  {{ local }}
+                         <p>VS</p>
+                         <img src="{{ escudo_visit }}" alt="Escudo del equipo visitante" class="escudo-equipo">  {{ visitante }}
                     </div>
-                    <!-- Escudo y nombre del equipo visitante -->
-                    <div class="equipo-visitante">
-                        <img src="{{ escudo_visit }}" alt="Escudo del equipo visitante" class="escudo-equipo">  {{ visitante }}
-                    </div>
-                    <!-- Resultado del partido -->
                     <div class="resultado">
                         <p><strong>Resultado:</strong> {{ goles_local }}-{{ goles_visit }}</p>
                     </div>
