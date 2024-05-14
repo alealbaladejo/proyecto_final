@@ -59,7 +59,6 @@ def obtener_partidos(partido_numero):
     return resultados
 
 
-
 @app.route('/detalle_partido/<int:partido_numero>')
 def detalles_partido(partido_numero):
     resultados = obtener_partidos(partido_numero)
@@ -106,7 +105,7 @@ def obtener_ligas():
     response = requests.get(url, headers=headers)
     data = response.json()
 
-    ligas = []  # Lista para almacenar los códigos y nombres de las ligas
+    ligas = []  
 
     for competition in data['competitions']:
         codigo_liga = competition['code']
@@ -116,7 +115,24 @@ def obtener_ligas():
     return ligas
 
 
+@app.route('/estadisticas_partido', methods=['GET', 'POST'])
+def estadisticas_partido():
+    if request.method == 'POST':
+        fecha = request.form['fecha']
+        datos_partidos = obtener_partidos_por_fecha(fecha)
+        return render_template('estadisticas.html', resultados=datos_partidos)
+    return render_template('estadisticas.html')
 
+
+# Función para obtener los partidos por fecha desde la API
+def obtener_partidos_por_fecha(fecha):
+    url = f'https://api.football-data.org/v4/matches/?date={fecha}'
+    token = os.environ.get('token')
+    headers = {'X-Auth-Token': token}
+    response = requests.get(url, headers=headers)
+    datos = response.json()
+    partidos = datos.get('matches', [])
+    return partidos
 
 if __name__ == '__main__':
     app.run(debug=True)

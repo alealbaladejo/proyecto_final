@@ -30,6 +30,8 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ url_for('inicio') }}" class="btn btn-primary">Inicio</a>
+
             </form>
         </div>
     </div>
@@ -57,7 +59,7 @@
             {% for team in datos_clasificacion['standings'][0]['table'] %}
             <tr>
                 <td>{{ team['position'] }}</td>
-                <td>{{ team['team']['name'] }}</td>
+                <td><img src="{{ team['team']['crest'] }}" alt="Escudo del {{ team['team']['name'] }}" style="width: 50px; height: 50px;">  {{ team['team']['shortName'] }}</td>
                 <td>{{ team['playedGames'] }}</td>
                 <td>{{ team['won'] }}</td>
                 <td>{{ team['draw'] }}</td>
@@ -76,5 +78,4 @@
     <h2 class="text-danger">No se encontraron datos para la liga {{ liga_seleccionada }} temporada {{ year }}</h2>
 </div>
 {% endif %}
-
 {% endblock %}

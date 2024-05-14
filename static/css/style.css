@@ -1532,14 +1532,14 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #757575;
+  color: #291e1e;
+  background-color: #beceec;
 }
 
 .table th,
 .table td {
   padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #6e6c6c;
 }
 
 .table thead th {
@@ -4400,6 +4400,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  background-color: #e7e3e3;
 }
 
 .card-title {
@@ -4414,6 +4415,7 @@ input[type="button"].btn-block {
 .card-text:last-child {
   margin-bottom: 0;
 }
+
 
 .card-link:hover {
   text-decoration: none;
@@ -4432,9 +4434,14 @@ input[type="button"].btn-block {
 
 .card-footer {
   padding: 0.75rem 1.25rem;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  text-align: center;
 }
+.card-footer strong {
+  color: #000;
+}
+
 
 .card-header-tabs {
   margin-right: -0.625rem;
@@ -6095,8 +6102,11 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #FF4800 !important;
+  background-color: #b11515 !important;
+  text-align: center;
+  font-style: italic ;
 }
+
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -9793,3 +9803,14 @@ p,
   background-color: red; 
 }
 
+.escudo {
+  max-width: 80px; 
+  max-height: 80px; 
+}
+
+.card-text  {
+  color: red;
+}
+.card-title {
+  color: blue;
+}

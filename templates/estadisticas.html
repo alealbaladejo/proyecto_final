@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Estadísticas del Partido{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid mb-5">
+    <div class="container text-center py-5">
+        <h1 class="text-primary mb-4">PARTIDOS</h1>
+        <h1 class="text-white display-3 mb-5">ELIGE UNA FECHA</h1>
+        <div class="mx-auto" style="width: 200%; max-width: 600px;">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha">
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ url_for('inicio') }}" class="btn btn-primary">Inicio</a>
+
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+{% if resultados %}
+<div class="row">
+    {% for partido in resultados %}
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {{ partido.competition.name }}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ partido.homeTeam.crest }}" alt="{{ partido.homeTeam.name }}" class="img-fluid rounded mx-auto d-block" style="max-width: 100px;">
+                        </div>
+                        <div class="col-md-4 text-center my-auto">
+                            <h5 class="card-title">{{ partido.homeTeam.name }}</h5>
+                            <p class="card-text"><strong>VS</strong></p>
+                            <h5 class="card-title">{{ partido.awayTeam.name }}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ partido.awayTeam.crest }}" alt="{{ partido.awayTeam.name }}" class="img-fluid rounded mx-auto d-block" style="max-width: 100px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <strong>Resultado:</strong> {{ partido.score.fullTime.home }} - {{ partido.score.fullTime.away }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-warning" role="alert">No se encontraron resultados para la búsqueda.</div>
+{% endif %}
+</div>
+{% endblock %}
