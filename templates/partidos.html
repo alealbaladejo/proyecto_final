@@ -5,7 +5,7 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid mb-5">
     <div class="container text-center py-5">
-        <h1 class="text-primary mb-4">LISTA DE PARTIDOS</h1>
+        <h1 class="text-primary mb-4">ENFRENTAMIENTOS</h1>
         <h1 class="text-white display-3 mb-5">LISTADO DE PARTIDOS</h1>
         <div class="mx-auto" style="width: 200%; max-width: 600px;">
             <form action="{{ url_for('partidos') }}" method="POST">
@@ -18,32 +18,43 @@
             </form>
         </div>
     </div>
-
+</div>
+{% if busqueda %}
     {% if resultados %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-primary">Resultados</h2>
-                <ul class="list-group">
-                    {% for resultado in resultados %}
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <strong>Fecha:</strong> {{ resultado.fecha }}<br>
-                                    <strong>Local:</strong> {{ resultado.local }}<br>
-                                    <strong>Visitante:</strong> {{ resultado.visitante }}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="titulo">Partidos encontrados</h2>
+                    <ul class="list-group">
+                        {% for resultado in resultados %}
+                            <li class="lista">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong>Fecha:</strong> {{ resultado.fecha }}<br>
+                                        <strong>Local:</strong> {{ resultado.local }}<br>
+                                        <strong>Visitante:</strong> {{ resultado.visitante }}
+                                    </div>
+                                    <div>
+                                        <a href="{{ url_for('detalles_partido', partido_numero=resultado.numero_partido) }}" class="btn btn-primary">Ver detalles</a>
+                                    </div>
                                 </div>
-                                <div>
-                                    <a href="{{ url_for('detalles_partido', partido_numero=resultado.numero_partido) }}" class="btn btn-primary">Ver detalles</a>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+        {% else %}
+
+
+
+                <div class="mensaje">
+                    <h2>{{ mensaje }}</h2>
+                </div>
+
+
     {% endif %}
-    
-</div>
+{% endif %}
+
 {% endblock %}

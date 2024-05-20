@@ -11,14 +11,17 @@ def inicio():
 
 @app.route('/partidos', methods=['GET', 'POST'])
 def partidos():
+    busqueda=False
+    resultados=None
+    mensaje=None
     if request.method == 'POST':
         partido_numero = request.form['partido_numero']
         resultados = obtener_partidos(partido_numero)
+        busqueda=True
         if not resultados:
             mensaje = f"No se encontraron partidos para el número {partido_numero}."
-            return render_template('partidos.html', mensaje=mensaje)
-        return render_template('partidos.html', resultados=resultados)
-    return render_template('partidos.html')
+    return render_template('partidos.html', resultados=resultados, busqueda=busqueda, mensaje=mensaje)
+
 
 
 def obtener_partidos(partido_numero):
@@ -84,7 +87,13 @@ def detalles_partido(partido_numero):
 
 @app.route('/clasificacion', methods=['GET', 'POST'])
 def clasificacion():
+    formulario_enviado = False
+    datos_clasificacion = None
+    liga_seleccionada = None
+    year = None
+
     if request.method == 'POST':
+        formulario_enviado = True
         liga_codigo = request.form['liga_codigo']
         temporada = request.form['year']
         url = f'https://api.football-data.org/v4/competitions/{liga_codigo}/standings/?season={temporada}'
@@ -92,11 +101,11 @@ def clasificacion():
         headers = {'X-Auth-Token': token}
         response = requests.get(url, headers=headers)
         datos_clasificacion = response.json()
+        liga_seleccionada = liga_codigo
+        year = temporada
 
+    return render_template('clasificacion.html', ligas=obtener_ligas(), liga_seleccionada=liga_seleccionada, year=year, datos_clasificacion=datos_clasificacion, formulario_enviado=formulario_enviado)
 
-        return render_template('clasificacion.html', ligas=obtener_ligas(), liga_seleccionada=liga_codigo, year=temporada, datos_clasificacion=datos_clasificacion)
-
-    return render_template('clasificacion.html', ligas=obtener_ligas())
 
 def obtener_ligas():
     token = os.environ.get('token')
@@ -117,11 +126,15 @@ def obtener_ligas():
 
 @app.route('/estadisticas_partido', methods=['GET', 'POST'])
 def estadisticas_partido():
+    formulario_enviado = False
+    datos_partidos = None
+
     if request.method == 'POST':
+        formulario_enviado = True
         fecha = request.form['fecha']
         datos_partidos = obtener_partidos_por_fecha(fecha)
-        return render_template('estadisticas.html', resultados=datos_partidos)
-    return render_template('estadisticas.html')
+
+    return render_template('estadisticas.html', resultados=datos_partidos, formulario_enviado=formulario_enviado)
 
 
 # Función para obtener los partidos por fecha desde la API
