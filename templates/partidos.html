@@ -11,7 +11,7 @@
             <form action="{{ url_for('partidos') }}" method="POST">
                 <div class="form-group">
                     <label for="partidoInput" class="text-white">Ingrese el número de partido:</label>
-                    <input type="text" class="form-control" id="partidoInput" name="partido_numero" placeholder="Número de partido (32299)">
+                    <input type="text" class="form-control" id="partidoInput" name="partido_numero" placeholder="Número de partido (32299)" value="{{ request.form.partido_numero or '' }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
                 <a href="{{ url_for('inicio') }}" class="btn btn-primary">Inicio</a>
